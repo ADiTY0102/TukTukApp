@@ -1,0 +1,245 @@
+✅Step 1
+    npm init -y   // node moules install
+    npm i express // 
+    created app.js =>  requite express 
+            const express = require('express');
+            const app = express();
+
+
+            app.get('./',(req,res)=>{
+                  res.send("This side tuktukkk app...!!")
+                })});
+
+            module.exports = app;
+        //written this boiler plate in that file...
+
+    created server.js  => serverrelated flow
+        const http = require('http');
+        const app = require('./app');
+        ...
+✅Step 2
+    npm i dotenv cors => downloading dependencies for taking data from env variables
+        and setting cors
+    require both of them in app.js file
+    Now created .env file for port and require port in server.js
+            server.listen(port,()=>{
+                console.log(`Server is Listening on ${port}`);
+            });
+    run server => npm nodemon
+
+✅Step 3
+    Starting Mongoose part..
+    npm i mongoose
+    written a boilerplate and created folder Db => ctrstrd file db.js
+    in env filr maintioned db url
+    then use that in app.js => // const connectToDB = require('./db/db');
+                                  connectToDB();
+
+✅Step 4
+    Create models folder =>  user.model.js file created
+        required mongoose and then state the schema for that model { fullname,email,password etc}
+    for hashing password install < npm i bcrypt jsonwebtoken >
+    writtend some methods like
+        1.generateAwthTokens()
+        2.comparePassword()
+        3.hashPassword()
+    After this we created controller for user model =>  controllers -> user.controller.js
+
+
+✅Step 5 
+    6:41 PM --- 24/7/2025
+    Proper Authantication part starting...    
+
+    creating a router folder => user.route.js 
+    now installing all the dependencies like "npm i express-validator"
+    creating router for user registration   
+    Now created services folder => user.service.js   
+
+
+✅Step 6
+    Postman testing http://localhost:4000/users/register
+            {
+                "fullname":{
+                        "firstname":"aditya",
+                        "lastname": "binjagermath"
+                     },
+                 "email":"test@gmail.com",
+                 "password":"ase@3456d"
+             }
+    Postman Test result for above request
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODgyOGQwNzZmMzhkNDM2M2UyMGUwODQi
+                        LCJpYXQiOjE3NTMzODYyNDd9.KEKZoFcUx8oBiz8B86yPEWoh1CiYhj8jeB7itaU7iPU",
+            "user": {
+                "fullname": {
+                    "firstname": "aditya",
+                    "lastname": "binjagermath"
+                },
+                "email": "test@gmail.com",
+                "password": "$2b$10$ZfLlx6iVLXoFHE1TnBaMvOUEcyigF6wIcIORBYp0LekSjYTUHnOkC",
+                "_id": "68828d076f38d4363e20e084",
+                "__v": 0
+            }
+        }
+
+
+✅Step 7
+
+    I have created a Login route in => user.route.js where i have accepted a email and passwprd and va;idated
+    using jwtvalidator and exported it 
+
+    Now i have started write code for controller for login router and extracted email and pass from body
+    and checkes with existing data and if found returned a status of 201 along with the jwttoken that generated 
+    aslo if any error or unauthorized entry happened returned a response of 401 status code 
+
+    Now all the test results are mentioning below 
+    200 OK✅
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODgyOGQwNzZmMzhkNDM2M2UyMGUwODQiLCJpYXQiOjE3NTM2ODM4N
+                        Th9.jR9.SaNlCTFlzxQ6mgWZrTotcD-mNyoqHW5ZD4CeB-KnZxA",
+            "user": {
+                "fullname": {
+                    "firstname": "aditya",
+                    "lastname": "binjagermath"
+                },
+                "_id": "68828d076f38d4363e20e084",
+                "email": "test@gmail.com",
+                "password": "$2b$10$ZfLlx6iVLXoFHE1TnBaMvOUEcyigF6wIcIORBYp0LekSjYTUHnOkC",
+                "__v": 0
+            }
+        }
+
+    401 Unauthoerized ❌
+    {
+    "message": "Invalid Email or password"
+    }
+
+
+✅Step 8
+
+    started creating route for user profile.=>  user.routes.js
+
+    First create a getuserProfile Controller and start the status checking 
+    for thst create a middleware => auth.middleware.js
+    
+    Data which is checked by middleware is either getting from cookies or header
+    so we are checking for both through POST man 
+
+    for checking cookie at middleware we need a package to intract with cookie i.e cookie-parser 
+    <npm i cookie-parser>
+
+    🪧Sending data from header
+    🪧Sending data from Cookie
+
+
+✅Step 9
+    Now im going to create a LogOut route => 
+        for this we need a new model where we store all the black Listed token on log out a user
+        there is a schema for blacklisted jwt tokens having TTL of 24 hr
+
+
+
+✅Step 10
+    Now going to execute all the above routers, Modles and controllers for Captain 
+    created following files
+        1. Captain.model.js
+        2. Captain.controller.js
+        3. Captain.route.js
+
+    now require all the above in app.js for using them
+
+    Performed all the userModel schemea part added new scheme
+    like vehicleType,color,plate,capacity and location along with socket id 
+
+    after creating a Refister route and writting ip methodes for user model 
+    like hasg password, crate jwttokens and compare password etc.
+
+    tested the thing in postman/test results are mentioned below
+
+    200 OK✅
+
+    (request)
+
+    {
+        "fullname": {
+            "firstname": "Bhishan",
+            "lastname": "Kumar"
+        },
+        "email": "test_captain@gmail.com",
+        "password": "bkumar@07",
+        "vehicle": {
+            "color": "red",
+            "plate": "MH 13 XY 6969",
+            "capacity": 3,
+            "vehicleType": "auto"
+        }
+    }
+
+    (response)
+
+    {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODg3Y2NmMDIyOTA3NWY0NmFjODViZDMiLCJpYXQiOjE3NTM3MzA
+             yODgsImV4cCI6MTc1MzgxNjY4OH0.oSwFTw4RO5LiykdzWETGoupvov74Xb7tKKc68EY3sXE",
+        "captain": {
+            "fullname": {
+                "firstname": "Bhishan",
+                "lastname": "Kumar"
+            },
+            "email": "test_captain@gmail.com",
+            "password": "$2b$10$DND5z0s0X/SsHTR/6z6aiej6z.jOp5XV1cwSX/vCfVj5aLkYSMWZ2",
+            "status": "inactive",
+            "vehicle": {
+                "color": "red",
+                "plate": "MH 13 XY 6969",
+                "capacity": 3,
+                "vehicleType": "auto"
+            },
+            "_id": "6887ccf0229075f46ac85bd3",
+            "__v": 0
+        }
+    }
+
+
+✅Step 11 
+    Now im going add the two more routes for captain lik 
+        1.Login
+        2.LogOut 
+        3.Profile
+    After this i have maded the middleware for captaion authentication
+    I have completed this all part for the routes and Middleware 
+    now im going to test all of this one by one in postman.. the results are mentioned below
+
+    200 OK✅
+    (Login => request)
+        {
+            "email": "test_captain@gmail.com",
+            "password": "bkumar@07"
+        }
+
+
+    200 OK✅
+    (Profile => request)
+    {
+        "captain": {
+            "fullname": {
+                "firstname": "Shivkumar",
+                "lastname": "Sharma"
+            },
+            "vehicle": {
+                "color": "Blue",
+                "plate": "MH 13 XY 6969",
+                "capacity": 3,
+                "vehicleType": "auto"
+            },
+            "_id": "6887e33d8229f88655677b20",
+            "email": "shivkumarsharma12@gmail.com",
+            "status": "inactive",
+            "__v": 0
+        }
+    }
+
+    200 OK✅
+    (Logout => request)
+    {
+        "message": "Logout Successfully"
+    }
