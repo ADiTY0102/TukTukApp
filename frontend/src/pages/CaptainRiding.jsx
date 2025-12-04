@@ -20,8 +20,6 @@ const CaptainRiding = () => {
           alt="Home"
           className="w-full h-full object-cover"
         />
-
-        
       </div>
       {/* captain-details */}
       <div className="h-1/5 p-6">
