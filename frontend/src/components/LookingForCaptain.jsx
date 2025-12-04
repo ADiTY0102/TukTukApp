@@ -33,7 +33,7 @@ const LookingForCaptain = (props) => {
                     <p className="text-sm text-gray-500">Domstic Airport, Haturee Wasti, Solapur 413002</p>
                 </div>
             </div>
-            <div className="flex items-center gap-5 p-2 border-gray-500">
+            <div className="flex items-center gap-5 p-2 border-gray-500 mb-5">
                 <i className="ri-wallet-3-fill"></i>
                 <div className="">
                     <h3 className="text-lg font-medium">₹193.52</h3>

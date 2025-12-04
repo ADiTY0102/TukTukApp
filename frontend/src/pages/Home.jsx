@@ -7,6 +7,7 @@ import LocationSearchPanel from "../components/LocationSearchPanel";
 import VehiclePanel from "../components/VehiclePanel";
 import ConfirmedRide from "../components/ConfirmedRide";
 import LookingForCaptain from "../components/LookingForCaptain";
+import WaitForCaptain from "../components/WaitForCaptain";
 
 const Home = () => {
   const [pickup, setPickup] = useState('')
@@ -15,13 +16,16 @@ const Home = () => {
   const [vehiclePanel, setVehiclePanel] = useState(false)
   const [confirmRidePanel, setConfirmRidePanel] = useState(false);
   const [vehicleFound,setVehicleFound] = useState(false);
-
+  const [waitingForCaptain, setWaitingForCaptain] = useState(false);
 
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
   const vehiclePanelRef = useRef(null);
   const confirmRidePanelRef = useRef(null);
   const vehicleFoundRef = useRef(null);
+  const waitingForCaptainRef = useRef(null);
+
+
   const submitHandler = (e) => {
     e.preventDefault();
   }
@@ -106,6 +110,23 @@ const Home = () => {
   },[vehicleFound])
 
 
+    useGSAP(function(){
+    if(waitingForCaptain){
+      gsap.to(waitingForCaptainRef.current,{
+        y: 0,
+        duration: 0.4,
+        ease: "power3.out"
+      })
+    } else {
+      gsap.to(waitingForCaptainRef.current,{
+        y: "100%",
+        duration: 0.4,
+        ease: "power3.in"
+      })
+    }
+  },[waitingForCaptain])
+
+
   return (
     <div className="relative h-screen overflow-hidden">
       <h1 className="text-2xl font-bold absolute mt-7 ml-2">TukTuk</h1>
@@ -184,6 +205,12 @@ const Home = () => {
           vehicleFound={vehicleFound}
           setVehicleFound={setVehicleFound}
           setVehiclePanel={setVehiclePanel}
+        />
+      </div>
+      <div ref={waitingForCaptainRef} className="fixed w-full z-30  bg-white bottom-0 px-3 py-6">
+        <WaitForCaptain
+          waitingForCaptain={waitingForCaptain}
+          setWaitingForCaptain={setWaitingForCaptain}
         />
       </div>
     </div>
