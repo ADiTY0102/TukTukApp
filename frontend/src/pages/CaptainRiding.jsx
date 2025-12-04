@@ -14,7 +14,7 @@ const CaptainRiding = () => {
       </div>
 
       {/* map-part */}
-      <div className="h-3/5">
+      <div className="h-4/5">
         <img
           src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif"
           alt="Home"
@@ -22,7 +22,7 @@ const CaptainRiding = () => {
         />
       </div>
       {/* captain-details */}
-      <div className="h-2/5 p-6">
+      <div className="h-1/5 p-6">
         
       </div>
       
