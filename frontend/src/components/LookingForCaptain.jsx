@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 
-const ConfirmedRide = (props) => {
+const LookingForCaptain = (props) => {
   return (
     <div>
       <h5
         className="p-1 text-center absolute w-[95%] top-0"
         onClick={() => {
-          props.setConfirmRidePanel(false);
+          props.setVehicleFound(false);
         }}
       >
         <i className="text-3xl text-gray-400 ri-arrow-down-wide-line"></i>
       </h5>
-      <h3 className="text-sm font-semibold bg-gray-200 rounded-full w-40 px-2 p-2 mb-1.5">
-        Confirm Your Ride <i className="ri-arrow-right-s-line"></i>{" "}
+      <h3 className="text-sm font-semibold bg-gray-200 rounded-full w-45 px-2 p-2 mb-1.5">
+        Looking For a Driver <i className="ri-arrow-right-s-line"></i>{" "}
       </h3>
 
       <div className="flex justify-between flex-col items-center gap-2">
@@ -20,14 +20,14 @@ const ConfirmedRide = (props) => {
 
         <div className="w-full mt-5">
             <div className="flex items-center gap-5 p-2 border-b-1 border-gray-500">
-                <i className="text-lg` ri-map-pin-3-fill"></i>
+                <i className="text-lg ri-map-pin-3-fill"></i>
                 <div className="">
                     <h3 className="text-lg font-medium">562/11 -WS</h3>
                     <p className="text-sm text-gray-500">Kambar Talav, Vijapur road solapur</p>
                 </div>
             </div>
             <div className="flex items-center gap-5 p-2 border-b-1 border-gray-500">
-                <i className="text-lg` ri-map-pin-3-line"></i>
+                <i className="text-lg ri-map-pin-3-line"></i>
                 <div className="">
                     <h3 className="text-lg font-medium">21/89 - NW</h3>
                     <p className="text-sm text-gray-500">Domstic Airport, Haturee Wasti, Solapur 413002</p>
@@ -40,14 +40,10 @@ const ConfirmedRide = (props) => {
                     <p className="text-sm text-gray-500">payment cash</p>
                 </div>
             </div>
-            
         </div>
-        <button onClick={()=>{
-          props.setVehicleFound(true);
-        }} className="w-full text-white font-semibold bg-green-600 rounded-lg">Confirm</button>
       </div>
     </div>
   );
-};
+}
 
-export default ConfirmedRide;
+export default LookingForCaptain;
