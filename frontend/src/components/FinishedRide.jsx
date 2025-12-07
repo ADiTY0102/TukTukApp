@@ -23,7 +23,7 @@ const FinishedRide = (props) => {
             src="https://img.freepik.com/free-photo/indian-woman-posing-cute-stylish-outfit-camera-smiling_482257-122351.jpg?semt=ais_hybrid&w=740&q=80"
             alt="profile-pic-captain"
           />
-          <h2 className="text-lg font-medium">Geetha Ramachandran</h2>
+          <h2 className="text-lg font-medium ml-3">Geetha Ramachandran</h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 Km</h5>
       </div>
@@ -58,12 +58,12 @@ const FinishedRide = (props) => {
         </div>
         <div className="mt-5">
           <Link
-              to={"/captain/riding"}
+              to={"/captain-home"}
               className="w-full flex justify-center text-white font-semibold bg-green-600 rounded-lg p-2"
             >
               Finish Ride
             </Link>
-            <p className='text-red-500 flax items-center justify-center'>Click on finish ride if you have completed the payment, ride.</p>
+            <p className='text-red-500 text-center text-sm mt-5 flex items-center justify-center'>Click on finish ride if you have completed the payment, ride.</p>
         </div>
       </div>
     </div>

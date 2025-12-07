@@ -63,7 +63,7 @@ const ConfirmRidePopUp = (props) => {
             </div>
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 ">
           <form onSubmit={(e)=>{
             submitHandler(e);
           }}>
@@ -73,7 +73,7 @@ const ConfirmRidePopUp = (props) => {
               onClick={() => {
                 props.setConfirmRidePopUp(false);
               }}
-              className="w-full flex justify-center text-white font-semibold bg-green-600 rounded-lg p-2"
+              className="w-full flex justify-center text-white font-semibold bg-green-600 rounded-lg mt-5 mb-4 p-2"
             >
               Confirm
             </Link>
@@ -82,7 +82,7 @@ const ConfirmRidePopUp = (props) => {
                 props.setRidePopUp(false);
                 props.setConfirmRidePopUp(false);
               }}
-              className="w-full text-gray-700 font-semibold bg-gray-200 rounded-lg p-2"
+              className="w-full text-gray-700 font-semibold bg-gray-200 rounded-lg p-2 "
             >
               Cancel
             </button>
