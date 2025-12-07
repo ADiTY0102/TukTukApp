@@ -243,3 +243,24 @@
     {
         "message": "Logout Successfully"
     }
+
+Monday 8/12/2025
+✅Step 11 
+    Created new service called: maps.services.js
+        here I'm going to add services for routing and featching responses from map api
+        also created an postman successful request
+    Created Router for map
+     🪧1. get Coordinates from using "address" parameter: 
+            I'm using address as a parameter to fetch Latitude and Longitude
+
+        api-request
+            {
+                address: "Santoshi Mata Mandir, Jule Solpaur, Solapur 413004"
+            }
+        api-response 200 OK✅
+            {
+                "coordinates": {
+                    "latitude": 17.638996852083334,
+                    "longitude": 75.90406484166665
+                }
+            }
