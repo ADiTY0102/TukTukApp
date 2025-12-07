@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const FinishedRide = (props) => {
   return (
-    <div className='w-full'>
+    <div>
       <h5
         className="p-1 text-center absolute w-[95%] top-2"
         onClick={() => {
@@ -61,8 +61,9 @@ const FinishedRide = (props) => {
               to={"/captain/riding"}
               className="w-full flex justify-center text-white font-semibold bg-green-600 rounded-lg p-2"
             >
-              Complete Ride
+              Finish Ride
             </Link>
+            <p className='text-red-500 flax items-center justify-center'>Click on finish ride if you have completed the payment, ride.</p>
         </div>
       </div>
     </div>
