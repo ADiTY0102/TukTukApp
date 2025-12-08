@@ -319,3 +319,75 @@ Monday 8/12/2025
                 }
             }
                     
+
+✅Step 13
+    Created new service called: maps.services.js
+        here I'm going to add services for routing and featching responses from map api
+        also created an postman successful request
+    Created Router for map
+     🪧3. get Auto Suggestions from using "text" parameter: 
+           I'm using adress text as a parameter to fetch Latitude and Longitude and suggestions of locations
+
+        api-request
+            {
+                text: "solapur
+            }
+
+        api-response 200 OK✅
+            {
+                "suggestions": [
+                    {
+                        "address": "Maharashtra",
+                        "name": "Solapur",
+                        "eLoc": "2YZYU8",
+                        "type": "CITY"
+                    },
+                    {
+                        "address": "Solapur Airport Area, Shankar Nagar, Solapur, Maharashtra, 413224",
+                        "name": "Solapur Airport",
+                        "eLoc": "7F67T2",
+                        "type": "POI"
+                    },
+                    {
+                        "address": "Gop, Puri District, Odisha, 752110",
+                        "name": "Solapur",
+                        "eLoc": "8733BS",
+                        "type": "VILLAGE"
+                    },
+                    {
+                        "address": "Bhavani Peth, Solapur, Maharashtra, 413002",
+                        "name": "Solpaur Tours And Travels",
+                        "eLoc": "S2W9S3",
+                        "type": "POI"
+                    },
+                    {
+                        "address": "Railway Line Road, Siddheshwar Peth, Solapur, Maharashtra, 413001",
+                        "name": "Solpaur Lokamangal Nagari Sahakari Patasanstha Maryadit",
+                        "eLoc": "WH2GKW",
+                        "type": "POI"
+                    },
+                    {
+                        "address": "North Kasba, Budhwar Peth, Solapur, Maharashtra, 413007",
+                        "name": "Loni Marathi Vidyalaya Solpaur",
+                        "eLoc": "PSB2WX",
+                        "type": "POI"
+                    },
+                    {
+                        "address": "10/22, Bhavani Peth, Solpaur, Solapur, Maharashtra, 413002",
+                        "name": "Bagadi Agencies",
+                        "eLoc": "M59AO8",
+                        "type": "POI"
+                    }
+                ]
+            }
+
+
+                            ======== Break =======
+
+    Added map services and routes for distance calculation and autocomplete suggestions;
+    updated environment variables and instructions.
+
+
+✅Step 13:
+
+
