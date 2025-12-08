@@ -264,3 +264,58 @@ Monday 8/12/2025
                     "longitude": 75.90406484166665
                 }
             }
+
+
+✅Step 12 
+    Created new service called: maps.services.js
+        here I'm going to add services for routing and featching responses from map api
+        also created an postman successful request
+    Created Router for map
+     🪧2. get Distance and Time from using "origin","destination" parameter: 
+           I'm using origin an destination as a parameter to fetch Latitude and Longitude
+
+        api-request
+            {
+                origin: "Solapur railway station, Solpaur"
+                destination: "Pune railway station, Pune"
+            }
+
+
+        api-response 200 OK✅
+            
+            {
+                "distanceTime": {
+                    "meta": {
+                    "code": 200
+                    },
+                    "routes": {
+                        "geodesic": {
+                            "distance": {
+                            "value": 204476.61232413497,
+                            "text": "204.5 km"
+                            }
+                        },
+                    "car": {
+                            "duration": {
+                            "value": 187.94554166666668,
+                            "text": "3 hrs 8 mins"
+                            },
+                            "distance": {
+                            "value": 240132,
+                            "text": "240.1 km"
+                            }
+                        },
+                    "foot": {
+                            "duration": {
+                            "value": 2759.73645,
+                            "text": "1 day 22 hrs"
+                            },
+                            "distance": {
+                            "value": 227653,
+                            "text": "227.7 km"
+                            }
+                        }
+                    }
+                }
+            }
+                    

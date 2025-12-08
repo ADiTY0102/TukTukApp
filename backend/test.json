@@ -1,0 +1,35 @@
+{
+  "distanceTime": {
+    "meta": {
+      "code": 200
+    },
+    "routes": {
+      "geodesic": {
+        "distance": {
+          "value": 204476.61232413497,
+          "text": "204.5 km"
+        }
+      },
+      "car": {
+        "duration": {
+          "value": 187.94554166666668,
+          "text": "3 hrs 8 mins"
+        },
+        "distance": {
+          "value": 240132,
+          "text": "240.1 km"
+        }
+      },
+      "foot": {
+        "duration": {
+          "value": 2759.73645,
+          "text": "1 day 22 hrs"
+        },
+        "distance": {
+          "value": 227653,
+          "text": "227.7 km"
+        }
+      }
+    }
+  }
+}
