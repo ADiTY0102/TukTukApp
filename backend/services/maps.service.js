@@ -4,6 +4,7 @@ require('dotenv').config();
 const RADAR_API_KEY = process.env.RADAR_MAP_API;
 const MAPMYINDIA_STATIC_KEY = process.env.MAPMYINDIA_STATIC_KEY;
 
+console.log('MAPMYINDIA_STATIC_KEY prefix:', MAPMYINDIA_STATIC_KEY?.slice(0, 6));
 
 if (!RADAR_API_KEY) {
   throw new Error('RADAR_API_KEY is not set in environment variables');
@@ -99,30 +100,42 @@ async function getDistanceTime(origin, destination) {
 
 async function getAutoCompleteSuggestions(queryText) {
   if (!queryText) throw new Error('Query text is required');
+  console.log('MAPMYINDIA_STATIC_KEY prefix:', MAPMYINDIA_STATIC_KEY?.slice(0, 6));
 
-  const response = await axios.get(
-    'https://search.mappls.com/search/places/autosuggest/json',
-    {
-      params: {
-        access_token: MAPMYINDIA_STATIC_KEY, // STATIC KEY HERE
-        query: queryText,
-        region: 'IND',
-        tokenizeAddress: true,
-      },
-      timeout: 5000,
-    }
-  );
 
-  const locations = response.data?.suggestedLocations || [];
-  return locations.map(loc => ({
-    address: loc.placeAddress,
-    name: loc.placeName,
-    eLoc: loc.eLoc,
-    lat: loc.latitude,
-    lng: loc.longitude,
-    type: loc.type,
-  }));
+  try {
+    const response = await axios.get(
+      'https://search.mappls.com/search/places/autosuggest/json',
+      {
+        params: {
+          access_token: MAPMYINDIA_STATIC_KEY,
+          query: queryText,
+          region: 'IND',
+          tokenizeAddress: true,
+        },
+        timeout: 5000,
+      }
+    );
+
+    const locations = response.data?.suggestedLocations || [];
+    return locations.map(loc => ({
+      address: loc.placeAddress,
+      name: loc.placeName,
+      eLoc: loc.eLoc,
+      lat: loc.latitude,
+      lng: loc.longitude,
+      type: loc.type,
+    }));
+  } catch (err) {
+    console.error(
+      'MapmyIndia autosuggest error:',
+      err.response?.status,
+      err.response?.data || err.message
+    );
+    throw err;
+  }
 }
+
 module.exports = {
   getAddressCoordinates,
   getDistanceTime,
