@@ -1,10 +1,9 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const RADAR_API_KEY = process.env.RADAR_MAP_API;
 const MAPMYINDIA_STATIC_KEY = process.env.MAPMYINDIA_STATIC_KEY;
 
-console.log('MAPMYINDIA_STATIC_KEY prefix:', MAPMYINDIA_STATIC_KEY?.slice(0, 6));
+const RADAR_API_KEY = process.env.RADAR_MAP_API;
 
 if (!RADAR_API_KEY) {
   throw new Error('RADAR_API_KEY is not set in environment variables');
@@ -100,30 +99,25 @@ async function getDistanceTime(origin, destination) {
 
 async function getAutoCompleteSuggestions(queryText) {
   if (!queryText) throw new Error('Query text is required');
-  console.log('MAPMYINDIA_STATIC_KEY prefix:', MAPMYINDIA_STATIC_KEY?.slice(0, 6));
-
 
   try {
-    const response = await axios.get(
-      'https://search.mappls.com/search/places/autosuggest/json',
-      {
-        params: {
-          access_token: MAPMYINDIA_STATIC_KEY,
-          query: queryText,
-          region: 'IND',
-          tokenizeAddress: true,
-        },
-        timeout: 5000,
-      }
-    );
+    const url =
+      'https://search.mappls.com/search/places/autosuggest/json' +
+      `?query=${encodeURIComponent(queryText)}` +
+      '&region=IND&tokenizeAddress=true' +
+      `&access_token=${MAPMYINDIA_STATIC_KEY}`;
+
+    const response = await axios.get(url, {
+      // no extra headers, no body
+      timeout: 5000,
+    });
 
     const locations = response.data?.suggestedLocations || [];
+
     return locations.map(loc => ({
       address: loc.placeAddress,
       name: loc.placeName,
       eLoc: loc.eLoc,
-      lat: loc.latitude,
-      lng: loc.longitude,
       type: loc.type,
     }));
   } catch (err) {
@@ -139,5 +133,11 @@ async function getAutoCompleteSuggestions(queryText) {
 module.exports = {
   getAddressCoordinates,
   getDistanceTime,
-  getAutoCompleteSuggestions
+  getAutoCompleteSuggestions,
+};
+
+module.exports = {
+  getAddressCoordinates,
+  getDistanceTime,
+  getAutoCompleteSuggestions,
 };
