@@ -389,6 +389,7 @@ Monday 8/12/2025
 
 
 ✅Step 14:
+
         creating new route js file for riders, so that all pick up location and avaliabiltity will be show cased by the means of 
         API's and router config. 
 
@@ -432,3 +433,8 @@ Monday 8/12/2025
     one function will b e called along with this successful ride creation
         - Using a strong crypto.randomInt() which is more secure and unpredictible than using simple 
           math.random()
+    successfully getting 6 digit otp--
+
+
+
+🚀🚀🚀all backend work is almost completed moving ahed with frontend integratoin of above map and rider routes..
