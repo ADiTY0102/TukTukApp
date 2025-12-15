@@ -389,5 +389,6 @@ Monday 8/12/2025
 
 
 ✅Step 14:
-
+        creating new route js file for riders, so that all pick up location and avaliabiltity will be show cased by the means of 
+        API's and router config. 
 
