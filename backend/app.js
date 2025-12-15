@@ -5,12 +5,13 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
 const connectToDB = require('./db/db');
-const mapsRoutes = require('./routes/maps.routes');
 connectToDB();
 
+
+const mapsRoutes = require('./routes/maps.routes');
 const userRoutes = require('./routes/user.route');
 const captainRoutes = require('./routes/captain.routes');
-
+const rideRoutes = require('./routes/ride.routes');
 
 
 //use-parts
@@ -30,7 +31,7 @@ app.get('/',(req,res)=>{
 app.use('/users',userRoutes);
 app.use('/captains',captainRoutes);
 app.use('/maps',mapsRoutes);
-
+app.use('/rides',rideRoutes)
 
 
 

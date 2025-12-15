@@ -392,3 +392,19 @@ Monday 8/12/2025
         creating new route js file for riders, so that all pick up location and avaliabiltity will be show cased by the means of 
         API's and router config. 
 
+        After rider router creation moving ahead for creating it's service and model
+
+        Created ride.model,js having mongoose schema (new) That taking everything required from user and captin like source,
+        destination,fare,status, etc.
+
+        Created ride.service created , in which im using previously created model for getDistanceTime() to figure out total fare 
+        according to the user specified value for vehicle type,pickup location and destination
+
+        Created ride.controller.js Just validating errors and creating a ride on the basisi of maintioned policies
+        in the ride.services page
+
+        require router in the app.js and created/ used "/rides" router for getting created/ started with ride creation 
+        
+✅Step 15:
+    Testing "/ride" route in postman..
+
