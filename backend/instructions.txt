@@ -408,3 +408,27 @@ Monday 8/12/2025
 ✅Step 15:
     Testing "/ride" route in postman..
 
+    request POST 
+        {
+            "pickup": "pune",
+            "destination": "mumbai",
+            "vehicleType":"car"
+        }    
+
+    response 200 OK✅
+        {
+            "user": "69404ca27a90a7f624c8183f",
+            "pickup": "pune",
+            "destination": "mumbai",
+            "fare": 2279.08364575,
+            "status": "pending",
+            "duration": 2.1028819166666666, //hrs
+            "distance": 148.185, //km
+            "_id": "694056f441ae31581292b2db",
+            "__v": 0
+        }
+    
+    now i am trying to generate a OTP along with ride creation in the same services 
+    one function will b e called along with this successful ride creation
+        - Using a strong crypto.randomInt() which is more secure and unpredictible than using simple 
+          math.random()

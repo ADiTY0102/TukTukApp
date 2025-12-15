@@ -43,29 +43,28 @@ async function getAddressCoordinates(address) {
   }
 }
 
+
 async function getDistanceTime(origin, destination) {
   if (!origin || !destination) {
     throw new Error('Origin and Destination are required');
   }
 
-  try {
-    const originCoords =
-      typeof origin === 'string'
-        ? await getAddressCoordinates(origin)
-        : (origin.latitude != null && origin.longitude != null
-            ? origin
-            : (origin.lat != null && origin.lng != null
-                ? { latitude: origin.lat, longitude: origin.lng }
-                : null));
+  const resolveCoords = async (value) => {
+    if (typeof value === 'string') {
+      return getAddressCoordinates(value);
+    }
+    if (value.latitude != null && value.longitude != null) {
+      return { latitude: value.latitude, longitude: value.longitude };
+    }
+    if (value.lat != null && value.lng != null) {
+      return { latitude: value.lat, longitude: value.lng };
+    }
+    return null;
+  };
 
-    const destinationCoords =
-      typeof destination === 'string'
-        ? await getAddressCoordinates(destination)
-        : (destination.latitude != null && destination.longitude != null
-            ? destination
-            : (destination.lat != null && destination.lng != null
-                ? { latitude: destination.lat, longitude: destination.lng }
-                : null));
+  try {
+    const originCoords = await resolveCoords(origin);
+    const destinationCoords = await resolveCoords(destination);
 
     if (!originCoords || !destinationCoords) {
       throw new Error('Could not resolve origin or destination to coordinates');
@@ -74,14 +73,15 @@ async function getDistanceTime(origin, destination) {
     const originParam = `${originCoords.latitude},${originCoords.longitude}`;
     const destinationParam = `${destinationCoords.latitude},${destinationCoords.longitude}`;
 
+    // ✅ define url before using it
     const url = 'https://api.radar.io/v1/route/distance';
 
     const response = await axios.get(url, {
       params: {
         origin: originParam,
         destination: destinationParam,
-        modes: 'car',           // <-- REQUIRED
-        units: 'metric',        // optional, but useful in India
+        modes: 'car',
+        units: 'metric',
       },
       headers: {
         Authorization: RADAR_API_KEY,
@@ -89,12 +89,39 @@ async function getDistanceTime(origin, destination) {
       timeout: 5000,
     });
 
-    return response.data;
+    const data = response.data;
+    const route =
+      data.routes?.car ||
+      data.routes?.['car'] ||
+      data.route ||
+      data.routes?.[0];
+
+    if (!route) {
+      throw new Error('No valid route in Radar response');
+    }
+
+    const distanceMeters =
+      route.distance?.value ?? route.distance ?? route.length;
+    const durationSeconds =
+      route.duration?.value ?? route.duration ?? route.time;
+
+    if (distanceMeters == null || durationSeconds == null) {
+      throw new Error('Radar route missing distance or duration');
+    }
+
+    return { distanceMeters, durationSeconds, raw: route };
   } catch (err) {
+    const meta = err.response?.data?.meta;
+    if (meta) {
+      console.error('Radar route/distance error:', meta);
+      throw new Error(meta.message || 'Radar routing failed');
+    }
     console.error('Radar route/distance error:', err.response?.data || err.message);
     throw err;
   }
 }
+
+
 
 
 async function getAutoCompleteSuggestions(queryText) {
