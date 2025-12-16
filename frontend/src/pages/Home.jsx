@@ -19,6 +19,7 @@ const Home = () => {
   const [confirmRidePanel, setConfirmRidePanel] = useState(false);
   const [vehicleFound, setVehicleFound] = useState(false);
   const [waitingForCaptain, setWaitingForCaptain] = useState(false);
+  const [vehicleType, setVehicleType] = useState(null);
   const [fare, setFare] = useState({});
 
   const panelRef = useRef(null);
@@ -30,27 +31,6 @@ const Home = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-  };
-
-  const findTrip = async () => {
-    setVehiclePanel(true);
-    setOpenPanel(false);
-
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
-        {
-          params: { pickup, destination },
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      console.log(response.data);
-      setFare(response.data);
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   useGSAP(
@@ -159,6 +139,42 @@ const Home = () => {
     [waitingForCaptain]
   );
 
+
+
+  const findTrip = async () => {
+    setVehiclePanel(true);
+    setOpenPanel(false);
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
+        {
+          params: { pickup, destination },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log(response.data);
+      setFare(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  async function createRide(){
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
+      pickup,
+      destination,
+      vehicleType
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    console.log(response);
+  } 
+
   return (
     <div className="relative h-screen overflow-hidden">
       <h1 className="text-2xl font-bold absolute mt-7 ml-2">TukTuk</h1>
@@ -221,7 +237,6 @@ const Home = () => {
               Search
             </button>
           </form>
-          
         </div>
         <div ref={panelRef} className="bg-white h-0 overflow-hidden">
           <LocationSearchPanel
@@ -245,7 +260,8 @@ const Home = () => {
           setVehiclePanel={setVehiclePanel}
           setConfirmRidePanel={setConfirmRidePanel}
           fare={fare}
-          
+          // createRide={createRide}
+          selectVehicle={setVehicleType}
         />
       </div>
 
@@ -258,6 +274,11 @@ const Home = () => {
           setConfirmRidePanel={setConfirmRidePanel}
           setVehiclePanel={setVehiclePanel}
           setVehicleFound={setVehicleFound}
+          createRide={createRide}
+          vehicleType={vehicleType}
+          pickup = {pickup}
+          destination={destination}
+          fare={fare}
         />
       </div>
       <div
@@ -268,6 +289,11 @@ const Home = () => {
           vehicleFound={vehicleFound}
           setVehicleFound={setVehicleFound}
           setVehiclePanel={setVehiclePanel}
+          createRide={createRide}
+          vehicleType={vehicleType}
+          pickup = {pickup}
+          destination={destination}
+          fare={fare}
         />
       </div>
       <div
