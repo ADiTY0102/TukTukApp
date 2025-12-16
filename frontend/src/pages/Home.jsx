@@ -8,6 +8,7 @@ import VehiclePanel from "../components/VehiclePanel";
 import ConfirmedRide from "../components/ConfirmedRide";
 import LookingForCaptain from "../components/LookingForCaptain";
 import WaitForCaptain from "../components/WaitForCaptain";
+import axios from "axios";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -18,6 +19,7 @@ const Home = () => {
   const [confirmRidePanel, setConfirmRidePanel] = useState(false);
   const [vehicleFound, setVehicleFound] = useState(false);
   const [waitingForCaptain, setWaitingForCaptain] = useState(false);
+  const [fare, setFare] = useState({});
 
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
@@ -28,6 +30,27 @@ const Home = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+  };
+
+  const findTrip = async () => {
+    setVehiclePanel(true);
+    setOpenPanel(false);
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
+        {
+          params: { pickup, destination },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setFare(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useGSAP(
@@ -157,7 +180,7 @@ const Home = () => {
           >
             <i className="ri-arrow-down-wide-line"></i>
           </h5>
-          <h4 className="text-2xl font-semibold mb-2">Find a Trip!</h4>
+          <h4 className="text-2xl font-semibold mb-1.5">Find a Trip</h4>
           <form
             onSubmit={(e) => {
               submitHandler(e);
@@ -190,7 +213,15 @@ const Home = () => {
               type="text"
               placeholder="Enter Your Destination"
             />
+            <button
+              type="button"
+              onClick={findTrip}
+              className="w-full bg-black text-white py-3 rounded-lg mt-4  font-medium"
+            >
+              Search
+            </button>
           </form>
+          
         </div>
         <div ref={panelRef} className="bg-white h-0 overflow-hidden">
           <LocationSearchPanel
