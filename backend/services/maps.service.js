@@ -162,9 +162,3 @@ module.exports = {
   getDistanceTime,
   getAutoCompleteSuggestions,
 };
-
-module.exports = {
-  getAddressCoordinates,
-  getDistanceTime,
-  getAutoCompleteSuggestions,
-};

@@ -46,8 +46,8 @@ const Home = () => {
           },
         }
       );
-      setFare(response.data);
       console.log(response.data);
+      setFare(response.data);
     } catch (err) {
       console.error(err);
     }
@@ -244,6 +244,8 @@ const Home = () => {
           vehiclePanel={vehiclePanel}
           setVehiclePanel={setVehiclePanel}
           setConfirmRidePanel={setConfirmRidePanel}
+          fare={fare}
+          
         />
       </div>
 

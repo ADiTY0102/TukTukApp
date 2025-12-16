@@ -31,17 +31,17 @@ async function getFare(pickup, destination) {
 
   const fare = {
     auto:
-      basefare.auto +
+      Math.round(basefare.auto +
       perKmRate.auto * distanceKm +
-      perMinRate.auto * durationMinutes,
+      perMinRate.auto * durationMinutes),
     car:
-      basefare.car +
+      Math.round(basefare.car +
       perKmRate.car * distanceKm +
-      perMinRate.car * durationMinutes,
+      perMinRate.car * durationMinutes),
     motorcycle:
-      basefare.motorcycle +
+      Math.round(basefare.motorcycle +
       perKmRate.motorcycle * distanceKm +
-      perMinRate.motorcycle * durationMinutes,
+      perMinRate.motorcycle * durationMinutes),
   };
 
   return { fare, distanceKm, durationMinutes };
