@@ -20,7 +20,7 @@ const WaitForCaptain = (props) => {
             <h3 className='text-lg font-medium'>Vinod Kumar</h3>
             <h2 className='text-xl font-bold -mt-1 -mb-1'>MH13 AB 2202</h2>
             <p className='text-sm text-gray-400'>Black Mahindra XUV 300</p>
-            <p className='text-sm text-gray-800'><i class="ri-star-s-fill"></i>4.2</p>
+            <p className='text-sm text-gray-800'><i className="ri-star-s-fill"></i>4.2</p>
 
         </div>
       </div>
