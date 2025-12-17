@@ -1,6 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
+import {CaptainDataContext} from "../context/captainContext";
 
 const CaptainDetails = () => {
+
+  const {captain} = useContext(CaptainDataContext);
+
   return (
     <div>
       {/* bottom-part-start */}
@@ -13,7 +17,7 @@ const CaptainDetails = () => {
           />
         </div>
         <div className="-ml-12">
-          <h4 className="text-lg font-medium">Yogesh Kumar</h4>
+          <h4 className="text-lg font-medium capitalize">{captain.fullname.firstname +" "+ captain.fullname.lastname}</h4>
           <p className="text-sm text-gray-500">Mahindra XUV</p>
         </div>
 
