@@ -1,10 +1,10 @@
 // socket.js
-const { Server } = require('socket.io');
+const socketIo = require('socket.io');
 
 let io; 
 
 function initializeSocket(server) {
-  io = new Server(server, {
+  io = socketIo(server, {
     cors: {
       origin: '*',
       methods: ['GET', 'POST'],
@@ -12,16 +12,12 @@ function initializeSocket(server) {
   });
 
   io.on('connection', (socket) => {
-    console.log('Socket connected:', socket.id);
+    console.log(`Socket connected: ${socket.id}`);
 
-    // Example:
-    socket.on('ping', (data) => {
-      console.log('Received ping from', socket.id, data);
-      socket.emit('pong', { message: 'pong', time: Date.now() });
-    });
+    
 
     socket.on('disconnect', () => {
-      console.log('Socket disconnected:', socket.id);
+      console.log(`Socket disconnected: ${socket.id}`);
     });
   });
 
