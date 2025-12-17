@@ -5,6 +5,8 @@ import App from "./App.jsx";
 import "./index.css";
 import { UserDataContext } from "./context/userContext.jsx";
 import CaptainContext from "./context/CaptainContext.jsx";
+import SocketProvider from "./context/SocketContext.jsx";
+
 function Root() {
   const [user, setUser] = useState(null);
 
@@ -12,7 +14,9 @@ function Root() {
     <BrowserRouter>
       <CaptainContext>
         <UserDataContext.Provider value={{ user, setUser }}>
-          <App />
+          <SocketProvider>
+            <App />
+          </SocketProvider>
         </UserDataContext.Provider>
       </CaptainContext>
     </BrowserRouter>
