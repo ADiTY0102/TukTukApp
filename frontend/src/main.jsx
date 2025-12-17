@@ -4,9 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 import { UserDataContext } from "./context/userContext.jsx";
-import CaptainContext, {
-  CaptainDataContext,
-} from "./context/CaptainContext.jsx";
+import CaptainContext from "./context/CaptainContext.jsx";
 function Root() {
   const [user, setUser] = useState(null);
 
