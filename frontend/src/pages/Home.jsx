@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
@@ -9,6 +9,8 @@ import ConfirmedRide from "../components/ConfirmedRide";
 import LookingForCaptain from "../components/LookingForCaptain";
 import WaitForCaptain from "../components/WaitForCaptain";
 import axios from "axios";
+import { SocketContext } from "../context/SocketContext";
+import { UserDataContext } from "../context/userContext";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -28,6 +30,23 @@ const Home = () => {
   const confirmRidePanelRef = useRef(null);
   const vehicleFoundRef = useRef(null);
   const waitingForCaptainRef = useRef(null);
+
+  const { socket } = useContext(SocketContext);
+  const { user } = useContext(UserDataContext);
+
+  useEffect(() => {
+    if (!user || !user._id) return;
+
+    const payload = { userType: 'user', userId: user._id };
+
+    if (socket && socket.connected) {
+      socket.emit('join', payload);
+    } else if (socket) {
+      const handleConnect = () => socket.emit('join', payload);
+      socket.on('connect', handleConnect);
+      return () => socket.off('connect', handleConnect);
+    }
+  }, [user, socket]);
 
   const submitHandler = (e) => {
     e.preventDefault();

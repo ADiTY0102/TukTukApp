@@ -22,9 +22,9 @@ const UserProtectWrapper = ({
             }
         }).then(response => {
             if (response.status === 200) {
-                setUser(response.data)
-                setIsLoading(false)
-            }
+                    setUser(response.data.user)
+                    setIsLoading(false)
+                }
         })
             .catch(err => {
                 console.log(err)
