@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const rideModel = require('../models/ride.model');
 const mapsService = require('../services/maps.service');
 const crypto = require('crypto');
@@ -32,57 +33,57 @@ async function getFare(pickup, destination) {
   const fare = {
     auto:
       Math.round(basefare.auto +
-      perKmRate.auto * distanceKm +
-      perMinRate.auto * durationMinutes),
+        perKmRate.auto * distanceKm +
+        perMinRate.auto * durationMinutes),
     car:
       Math.round(basefare.car +
-      perKmRate.car * distanceKm +
-      perMinRate.car * durationMinutes),
+        perKmRate.car * distanceKm +
+        perMinRate.car * durationMinutes),
     motorcycle:
       Math.round(basefare.motorcycle +
-      perKmRate.motorcycle * distanceKm +
-      perMinRate.motorcycle * durationMinutes),
+        perKmRate.motorcycle * distanceKm +
+        perMinRate.motorcycle * durationMinutes),
   };
 
   return { fare, distanceKm, durationMinutes };
 }
- module.exports.getFare = getFare;
+module.exports.getFare = getFare;
 
 
 
-function getOtp(number){
-    function genOtp(number){
-        const otp = crypto.randomInt(
-            Math.pow(10,number-1),
-            Math.pow(10,number)
-        ).toString();
-        return otp;
-    }
-    return genOtp(number);
+function getOtp(number) {
+  function genOtp(number) {
+    const otp = crypto.randomInt(
+      Math.pow(10, number - 1),
+      Math.pow(10, number)
+    ).toString();
+    return otp;
+  }
+  return genOtp(number);
 }
 
 
 
 module.exports.createRide = async ({ user, pickup, destination, vehicleType }) => {
-  if (!user || !pickup || !destination || !vehicleType) {
-    throw new Error('All fields are required');
-  }
+  if (!user) throw new Error('User is required');
+  if (!pickup || !destination) throw new Error('Pickup and destination are required');
+  if (!vehicleType) throw new Error('Vehicle type is required');
 
-  const allowedTypes = ['auto', 'car', 'motorcycle'];
-  if (!allowedTypes.includes(vehicleType)) {
-    throw new Error('Invalid vehicle type');
-  }
-
+  // compute fare and distance/time
   const { fare, distanceKm, durationMinutes } = await getFare(pickup, destination);
+  const fareForType = fare[vehicleType];
+
+  // create OTP
+  const otp = getOtp(4);
 
   const ride = await rideModel.create({
     user,
     pickup,
     destination,
-    otp: getOtp(6),
-    fare: fare[vehicleType],
+    fare: fareForType,
     distance: distanceKm,
     duration: durationMinutes,
+    otp,
   });
 
   return ride;

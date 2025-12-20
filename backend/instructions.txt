@@ -481,3 +481,8 @@ Monday 8/12/2025
 
     Open maps.services.js
         In this create ans export method getCaptainInTheRadius(lat,lng,radius)=>{}
+
+    getting riders live location and updated every 10 sec, also that lts and lng is saved in databse document
+    now implementing the message logic to the ridersperticularly in same radius via function created getCaptainInTheRadius(lat,lng,radius)=>{} 
+
+    
