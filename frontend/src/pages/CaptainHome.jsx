@@ -6,7 +6,7 @@ import CaptainDetails from "../components/CaptainDetails";
 import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
-import {CaptainDataContext} from "../context/captainContext";
+import { CaptainDataContext } from "../context/captainContext";
 
 
 const CaptainHome = () => {
@@ -20,11 +20,40 @@ const CaptainHome = () => {
   const { socket } = useContext(SocketContext);
   const { captain } = useContext(CaptainDataContext);
 
-  useEffect(()=>{
-    socket.emit("join",{
+  useEffect(() => {
+    socket.emit("join", {
       userId: captain._id,
       userType: "captain"
     })
+
+    //applying interval to send location every 5 seconds
+    const updateLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position => {
+
+          console.log({
+            userId: captain._id,
+            location: {
+            ltd: position.coords.latitude,
+            lng: position.coords.longitude
+          }
+          });
+
+          socket.emit("update-location-captain", {
+            userId: captain._id,
+            location: {
+              ltd: position.coords.latitude,
+              lng: position.coords.longitude
+            }
+          })
+        }))
+      }
+    }
+
+    const locationInterval = setInterval(updateLocation, 10000000000);
+    updateLocation();
+    // return () => clearInterval(locationInterval);
+
   })
 
   useGSAP(
