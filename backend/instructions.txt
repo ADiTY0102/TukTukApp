@@ -467,3 +467,17 @@ Monday 8/12/2025
         Server is Listening on 4000
         Connected to database!
         Socket connected: Vog0lLDJwY8IL2mYAAAB
+
+    Everything working grate.Encountered an issue i.e. trying to get socketId field in database but in schema the typo is occured 
+    so that facesd alot proble that my socket.emit("join",{}) this is not working and not updating the socketId on connection
+    Fixed that and moving ahead
+
+✅Step 17: 
+    After integrating socket initializer in frontend, noew working on the message notification feature
+    Once a ride is duccessfylly created by user then a notification will be awaked at captain side
+
+    opening ride.controller.js
+        for this we need users current location coordinated to awake message to nearby auto/cab captains
+
+    Open maps.services.js
+        In this create ans export method getCaptainInTheRadius(lat,lng,radius)=>{}

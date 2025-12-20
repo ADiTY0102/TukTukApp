@@ -1,4 +1,5 @@
 const axios = require('axios');
+const captainModel = require('../models/captain.model');
 require('dotenv').config();
 
 const MAPMYINDIA_STATIC_KEY = process.env.MAPMYINDIA_STATIC_KEY;
@@ -157,8 +158,24 @@ async function getAutoCompleteSuggestions(queryText) {
   }
 }
 
+
+
+async function getCaptainInTheRadius(ltd,lng,radius){
+  const captains = await captainModel.find({   // this is a inbuilt mongoose function to find documents within a certain radius
+    location: {
+      $groWithin:{
+        $centerSphere: [ [ ltd , lng ], radius / 6378.1 ]
+      }
+    }
+  })
+  return captains;
+}
+
+
+
 module.exports = {
   getAddressCoordinates,
   getDistanceTime,
   getAutoCompleteSuggestions,
+  getCaptainInTheRadius,
 };
