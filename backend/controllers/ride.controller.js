@@ -30,7 +30,7 @@ module.exports.createRide = async (req, res) => {
         const captainInRadius = await mapsService.getCaptainInTheRadius(
           pickupCoordinates.latitude,
           pickupCoordinates.longitude,
-          500
+          5
         );
 
         console.log("captainInRadius:", captainInRadius);

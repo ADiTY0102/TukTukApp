@@ -485,4 +485,27 @@ Monday 8/12/2025
     getting riders live location and updated every 10 sec, also that lts and lng is saved in databse document
     now implementing the message logic to the ridersperticularly in same radius via function created getCaptainInTheRadius(lat,lng,radius)=>{} 
 
-    
+    all i got is the 
+        1.Current location of Captain
+        2.Pickup destination
+        3.Nearby all riders in an array list
+
+        Client connected: XUjsIGTSDmm8xx-JAAAL
+        { latitude: 17.67152, longitude: 75.91044 }
+        captainInRadius: [
+        {
+            fullname: { firstname: 'Santosh', lastname: 'Kumar' },
+            vehicle: {
+            color: 'Black',
+            plate: 'MH 13 AB 2202',
+            capacity: 4,
+            vehicleType: 'auto'
+            },
+            location: { latitude: 17.637007570586682, longitude: 75.90914298720206 },
+            _id: new ObjectId('692d76ecdf2b9069d61a3f02'),
+            email: 'captain@gmail.com',
+            status: 'inactive',
+            __v: 0,
+            socketId: '22KPx7JlXZUZkd0PAAAF'
+        }
+        ]
