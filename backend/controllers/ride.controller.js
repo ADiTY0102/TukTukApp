@@ -21,22 +21,19 @@ module.exports.createRide = async (req, res) => {
       vehicleType,
     });
 
-    // 2) send response ONCE
     res.status(201).json(ride);
 
-    // 3) fire-and-forget extra work (no res.* inside)
     (async () => {
       try {
         const pickupCoordinates = await mapsService.getAddressCoordinates(pickup);
-
+        console.log(pickupCoordinates);
         const captainInRadius = await mapsService.getCaptainInTheRadius(
           pickupCoordinates.latitude,
           pickupCoordinates.longitude,
-          2
+          500
         );
 
         console.log("captainInRadius:", captainInRadius);
-        // you can also call sendMessageToSocketId here
       } catch (err) {
         console.error("Post-createRide side-effect error:", err.message);
       }

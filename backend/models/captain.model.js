@@ -60,10 +60,10 @@ const captainSchema = new mongoose.Schema({
         },
     },
     location:{
-        ltd:{
+        latitude:{
             type:Number,
         },
-        lng:{
+        longitude:{
             type:Number,
         },
     },

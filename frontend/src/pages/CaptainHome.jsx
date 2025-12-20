@@ -34,16 +34,16 @@ const CaptainHome = () => {
           console.log({
             userId: captain._id,
             location: {
-            ltd: position.coords.latitude,
-            lng: position.coords.longitude
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
           }
           });
 
           socket.emit("update-location-captain", {
             userId: captain._id,
             location: {
-              ltd: position.coords.latitude,
-              lng: position.coords.longitude
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
             }
           })
         }))

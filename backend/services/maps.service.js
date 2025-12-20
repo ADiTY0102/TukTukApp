@@ -160,11 +160,11 @@ async function getAutoCompleteSuggestions(queryText) {
 
 
 
-async function getCaptainInTheRadius(ltd,lng,radius){
+async function getCaptainInTheRadius(latitude,longitude,radius){
   const captains = await captainModel.find({   // this is a inbuilt mongoose function to find documents within a certain radius
     location: {
-      $groWithin:{
-        $centerSphere: [ [ ltd , lng ], radius / 6378.1 ]
+      $geoWithin:{
+        $centerSphere: [ [ latitude , longitude ], radius / 6378.1 ]
       }
     }
   })
