@@ -7,7 +7,8 @@ import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
 import {CaptainDataContext} from "../context/captainContext";
-import { Socket } from "socket.io-client";
+
+
 const CaptainHome = () => {
   const [ridePopUp, setRidePopUp] = useState(true);
   const [confirmRidePopUp, setConfirmRidePopUp] = useState(false);
