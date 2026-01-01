@@ -20,5 +20,3 @@ const UserContext = ({ children }) => {
 }
 
 export default UserContext;
-
-// Ensure to wrap your application with UserContext in the main file
