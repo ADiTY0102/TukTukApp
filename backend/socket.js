@@ -33,22 +33,38 @@ function initializeSocket(server) {
 
     //method for getting message function works and location updated
 
-    socket.on("update-location-captain", async(data)=>{
+    socket.on("update-location-captain", async (data) => {
       const { userId, location } = data;
       //console.log(`Updating location for  ${userId}: as ${location}`);
 
-      if(!location || !location.latitude || !location.longitude){
-        return socket.emit('error',{message:'Invalid location data'})
+      if (!location || !location.latitude || !location.longitude) {
+        return socket.emit('error', { message: 'Invalid location data' })
       }
 
-     await captainModel.findByIdAndUpdate(userId,{
-      location:{
-        latitude:location.latitude,
-        longitude:location.longitude
-      }
-    })
+      await captainModel.findByIdAndUpdate(userId, {
+        location: {
+          latitude: location.latitude,
+          longitude: location.longitude
+        }
+      })
 
     })
+
+    socket.on('update-location-captain', async (data) => {
+      const { userId, location } = data;
+      if (!location || !location.latitude || !location.longitude) {
+        return socket.emit('error', { message: 'Invalid location data' })
+      }
+
+      await captainModel.findByIdAndUpdate(userId, {
+        location: {
+          latitude: location.latitude,
+          longitude: location.longitude
+        }
+      })
+
+    })
+
 
     socket.on("disconnect", () => {
       console.log(`Socket disconnected: ${socket.id}`);
@@ -57,15 +73,16 @@ function initializeSocket(server) {
 
   return io;
 }
+const sendMessageToSocketId = (socketId, messageObject) => {
 
-function sendMessageToSocketId(socketId, message) {
-  if (io) {
-    io.to(socketId).emit("message: ", message);
-  } else {
-    console.error("Socket.io not initialized.");
-  }
+console.log(messageObject);
+
+    if (io) {
+        io.to(socketId).emit(messageObject.event, messageObject.data);
+    } else {
+        console.log('Socket.io not initialized.');
+    }
 }
-
 module.exports = {
   initializeSocket,
   sendMessageToSocketId,

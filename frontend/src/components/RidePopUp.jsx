@@ -22,9 +22,9 @@ const RidePopUp = (props) => {
             src="https://img.freepik.com/free-photo/indian-woman-posing-cute-stylish-outfit-camera-smiling_482257-122351.jpg?semt=ais_hybrid&w=740&q=80"
             alt="profile-pic-captain"
           />
-          <h2 className="text-lg font-medium">Geetha Ramachandran</h2>
+          <h2 className="text-lg font-medium">{props.ride?.user.firstname + " " + props.ride?.user.lastname}</h2>
         </div>
-        <h5 className="text-lg font-semibold">2.2 Km</h5>
+        <h5 className="text-lg font-semibold">{props.ride?.distance}</h5>
       </div>
 
       <div className="flex justify-between flex-col items-center gap-2">
@@ -34,7 +34,7 @@ const RidePopUp = (props) => {
             <div className="">
               <h3 className="text-lg font-medium">562/11 -WS</h3>
               <p className="text-sm text-gray-500">
-                Kambar Talav, Vijapur road solapur
+                {props.ride?.pickup}
               </p>
             </div>
           </div>
@@ -43,14 +43,14 @@ const RidePopUp = (props) => {
             <div className="">
               <h3 className="text-lg font-medium">21/89 - NW</h3>
               <p className="text-sm text-gray-500">
-                Domstic Airport, Haturee Wasti, Solapur 413002
+                {props.ride?.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-2 border-gray-500">
             <i className="ri-wallet-3-fill"></i>
             <div className="">
-              <h3 className="text-lg font-medium">₹193.52</h3>
+              <h3 className="text-lg font-medium">₹{props.ride?.fare}</h3>
               <p className="text-sm text-gray-500">payment cash</p>
             </div>
           </div>

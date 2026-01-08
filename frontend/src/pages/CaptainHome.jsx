@@ -7,15 +7,16 @@ import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
 import { CaptainDataContext } from "../context/captainContext";
+// import userModel from "../../../backend/models/user.model";
 
 
 const CaptainHome = () => {
-  const [ridePopUp, setRidePopUp] = useState(true);
+  const [ridePopUp, setRidePopUp] = useState(false);
   const [confirmRidePopUp, setConfirmRidePopUp] = useState(false);
 
   const ridepopUpRef = useRef(null);
   const confirmRidepopUpRef = useRef(null);
-
+  const [ride, setRide] = useState(null);
 
   const { socket } = useContext(SocketContext);
   const { captain } = useContext(CaptainDataContext);
@@ -26,7 +27,7 @@ const CaptainHome = () => {
       userType: "captain"
     })
 
-    //applying interval to send location every 5 seconds
+    //applying interval to send location every 10 seconds
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position => {
@@ -54,6 +55,11 @@ const CaptainHome = () => {
     updateLocation();
     // return () => clearInterval(locationInterval);
 
+  },[]);
+  socket.on('new-ride-request',(data)=>{
+    console.log(data);
+    setRide(data);
+    setRidePopUp(true);
   })
 
   useGSAP(
@@ -125,6 +131,7 @@ const CaptainHome = () => {
         className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
       >
         <RidePopUp
+          // ride{ride}
           ridePopUp={ridePopUp}
           setRidePopUp={setRidePopUp}
           setConfirmRidePopUp={setConfirmRidePopUp}
