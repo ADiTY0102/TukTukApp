@@ -473,7 +473,7 @@ Monday 8/12/2025
     Fixed that and moving ahead
 
 ✅Step 17: 
-    After integrating socket initializer in frontend, noew working on the message notification feature
+    After integrating socket initializer in frontend, now working on the message notification feature
     Once a ride is duccessfylly created by user then a notification will be awaked at captain side
 
     opening ride.controller.js
@@ -493,19 +493,21 @@ Monday 8/12/2025
         Client connected: XUjsIGTSDmm8xx-JAAAL
         { latitude: 17.67152, longitude: 75.91044 }
         captainInRadius: [
-        {
-            fullname: { firstname: 'Santosh', lastname: 'Kumar' },
-            vehicle: {
-            color: 'Black',
-            plate: 'MH 13 AB 2202',
-            capacity: 4,
-            vehicleType: 'auto'
-            },
-            location: { latitude: 17.637007570586682, longitude: 75.90914298720206 },
-            _id: new ObjectId('692d76ecdf2b9069d61a3f02'),
-            email: 'captain@gmail.com',
-            status: 'inactive',
-            __v: 0,
-            socketId: '22KPx7JlXZUZkd0PAAAF'
-        }
+            {
+                fullname: { firstname: 'Santosh', lastname: 'Kumar' },
+                vehicle: {
+                color: 'Black',
+                plate: 'MH 13 AB 2202',
+                capacity: 4,
+                vehicleType: 'auto'
+                },
+                location: { latitude: 17.637007570586682, longitude: 75.90914298720206 },
+                _id: new ObjectId('692d76ecdf2b9069d61a3f02'),
+                email: 'captain@gmail.com',
+                status: 'inactive',
+                __v: 0,
+                socketId: '22KPx7JlXZUZkd0PAAAF'
+            }
         ]
+
+✅Step 18: 

@@ -22,9 +22,9 @@ const RidePopUp = (props) => {
             src="https://img.freepik.com/free-photo/indian-woman-posing-cute-stylish-outfit-camera-smiling_482257-122351.jpg?semt=ais_hybrid&w=740&q=80"
             alt="profile-pic-captain"
           />
-          <h2 className="text-lg font-medium">{props.ride?.user.firstname + " " + props.ride?.user.lastname}</h2>
+          <h2 className="text-lg font-medium">{(props.ride?.user?.fullname?.firstname || "") + " " + (props.ride?.user?.fullname?.lastname || "")}</h2>
         </div>
-        <h5 className="text-lg font-semibold">{props.ride?.distance}</h5>
+        <h5 className="text-lg font-semibold">{props.ride?.distance?.toFixed(2)} Km</h5>
       </div>
 
       <div className="flex justify-between flex-col items-center gap-2">
@@ -32,7 +32,7 @@ const RidePopUp = (props) => {
           <div className="flex items-center gap-5 p-2 border-b-1 border-gray-500">
             <i className="text-lg` ri-map-pin-3-fill"></i>
             <div className="">
-              <h3 className="text-lg font-medium">562/11 -WS</h3>
+              <h3 className="text-lg font-medium">{props.ride?.pickup}</h3>
               <p className="text-sm text-gray-500">
                 {props.ride?.pickup}
               </p>
@@ -41,7 +41,7 @@ const RidePopUp = (props) => {
           <div className="flex items-center gap-5 p-2 border-b-1 border-gray-500">
             <i className="text-lg` ri-map-pin-3-line"></i>
             <div className="">
-              <h3 className="text-lg font-medium">21/89 - NW</h3>
+              <h3 className="text-lg font-medium">{props.ride?.destination}</h3>
               <p className="text-sm text-gray-500">
                 {props.ride?.destination}
               </p>
@@ -57,10 +57,11 @@ const RidePopUp = (props) => {
         </div>
 
 
-        <div className="mt-5 w-full flex items-center justify-between p-5">
+        <div className="mt-5 w-full flex items-center justify-center text-lg gap-10 p-5">
             <button
           onClick={() => {
             props.setConfirmRidePopUp(true);
+            props.confirmRide();
           }}
           className=" text-white font-semibold bg-green-600 rounded-lg p-2 px-8 mt-1"
         >

@@ -7,6 +7,7 @@ import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
 import { CaptainDataContext } from "../context/captainContext";
+// import { set } from "mongoose";
 // import userModel from "../../../backend/models/user.model";
 
 
@@ -61,6 +62,16 @@ const CaptainHome = () => {
     setRide(data);
     setRidePopUp(true);
   })
+
+  async function confirmRide() {
+    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/rides/confirm`, {})
+      
+    setRidePopUp(false);
+    setConfirmRidePopUp(true);
+  }
+
+
+
 
   useGSAP(
     function () {
@@ -131,10 +142,11 @@ const CaptainHome = () => {
         className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
       >
         <RidePopUp
-          // ride{ride}
+          ride={ride}
           ridePopUp={ridePopUp}
           setRidePopUp={setRidePopUp}
           setConfirmRidePopUp={setConfirmRidePopUp}
+          confirmRide={confirmRide}
         />
       </div>
       <div

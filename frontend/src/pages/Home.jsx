@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useRef, useEffect, useContext } from "react";
 import { useGSAP } from "@gsap/react";
+import axios from "axios";
+// import axios from "axios";
 import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
 import LocationSearchPanel from "../components/LocationSearchPanel";
@@ -8,7 +10,6 @@ import VehiclePanel from "../components/VehiclePanel";
 import ConfirmedRide from "../components/ConfirmedRide";
 import LookingForCaptain from "../components/LookingForCaptain";
 import WaitForCaptain from "../components/WaitForCaptain";
-import axios from "axios";
 import { SocketContext } from "../context/SocketContext";
 import { UserDataContext } from "../context/userContext";
 
@@ -47,6 +48,14 @@ const Home = () => {
       return () => socket.off('connect', handleConnect);
     }
   }, [user, socket]);
+
+
+  socket.on('ride-confirmed', ride => {
+    setWaitingForCaptain(true)
+  })
+
+
+
 
   const submitHandler = (e) => {
     e.preventDefault();
